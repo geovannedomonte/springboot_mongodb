@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.geovannedomonte.projetomongo.domain.User;
 import com.geovannedomonte.projetomongo.repository.UserRepository;
+import com.geovannedomonte.projetomongo.services.exception.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -16,6 +17,14 @@ public class UserService {
 	
 	public List<User> findAll(){
 		return reposi.findAll();
+	}
+	
+	public User findById(String id) {
+			User user = reposi.findById(id).orElse(null);
+			if (user == null) {
+				throw new ObjectNotFoundException("Obejeto não encintrado");
+			}
+			return user;
 	}
 
 }
