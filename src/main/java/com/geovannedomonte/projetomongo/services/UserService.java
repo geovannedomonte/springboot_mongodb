@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geovannedomonte.projetomongo.domain.User;
+import com.geovannedomonte.projetomongo.dto.UserDTO;
 import com.geovannedomonte.projetomongo.repository.UserRepository;
 import com.geovannedomonte.projetomongo.services.exception.ObjectNotFoundException;
 
@@ -25,6 +26,14 @@ public class UserService {
 				throw new ObjectNotFoundException("Obejeto não encintrado");
 			}
 			return user;
+	}
+	
+	public User insert(User obj) {
+		return reposi.insert(obj);
+	}
+	
+	public User fromDTO(UserDTO objDto) {
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 
 }
